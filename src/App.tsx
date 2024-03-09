@@ -12,6 +12,10 @@ type TodoListType = {
   filter: FilterValuesType;
 };
 
+type TasksStateType = {
+  [key: string]: Array<TaskType>;
+};
+
 function App() {
   function removeTask(id: string, todoListId: string) {
     let tasks = tasksObj[todoListId];
@@ -50,6 +54,14 @@ function App() {
       setTasks({ ...tasksObj });
     }
   }
+  function changeTaskTitle(taskId: string, newTitle: string, todoListId: string) {
+    let tasks = tasksObj[todoListId];
+    let task = tasks.find((t) => t.id === taskId);
+    if (task) {
+      task.title = newTitle;
+      setTasks({ ...tasksObj });
+    }
+  }
 
   let todoListId1 = v1();
   let todoListId2 = v1();
@@ -59,15 +71,23 @@ function App() {
     { id: todoListId2, title: 'What to buy', filter: 'all' },
   ]);
 
-  let removeTodoList = (todoListId: string) => {
+  function removeTodoList(todoListId: string) {
     let filteredTodoList = todoLists.filter((todoList) => todoList.id !== todoListId);
     setTodoLists(filteredTodoList);
 
     delete tasksObj[todoListId];
     setTasks({ ...tasksObj });
-  };
+  }
+  function changeTodoListTitle(todoListId: string, newTitle: string) {
+    const todoList = todoLists.find((todoList) => todoList.id === todoListId);
 
-  const [tasksObj, setTasks] = useState({
+    if (todoList) {
+      todoList.title = newTitle;
+      setTodoLists([...todoLists]);
+    }
+  }
+
+  const [tasksObj, setTasks] = useState<TasksStateType>({
     [todoListId1]: [
       { id: v1(), title: 'CSS+HTML', isDone: true },
       { id: v1(), title: 'JS', isDone: true },
@@ -118,8 +138,10 @@ function App() {
             changeFilter={changeFilter}
             addTask={addTask}
             changeTaskStatus={changeStatus}
+            changeTaskTitle={changeTaskTitle}
             filter={todoList.filter}
             removeTodoList={removeTodoList}
+            changeTodoListTitle={changeTodoListTitle}
           />
         );
       })}
