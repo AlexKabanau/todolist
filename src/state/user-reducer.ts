@@ -20,6 +20,11 @@ export const userReducer = (state: StateType, action: ActionType): StateType => 
         ...state,
         childrenCount: state.childrenCount + 1,
       };
+    case 'CHANGE-USER-NAME':
+      return {
+        ...state,
+        name: action.newName,
+      };
     default:
       throw new Error(`Action ${action.type} is not supported`);
   }
