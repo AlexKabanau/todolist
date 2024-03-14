@@ -29,6 +29,9 @@ export function EditableSpan(props: EditableSpanPropsType) {
 
   return editMode ? (
     <TextField
+      variant={'filled'}
+      color={'success'}
+      label={'Change value'}
       autoFocus
       type="text"
       value={title}

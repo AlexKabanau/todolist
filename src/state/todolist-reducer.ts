@@ -55,12 +55,11 @@ export const todolistReducer = (
       let todoList = state.find((tl) => tl.id === action.id);
       if (todoList) {
         todoList.filter = action.filter;
-        return [...state];
       }
+      return [...state];
     }
-
     default:
-      throw new Error(`Action ${action.type} is not supported`);
+      throw new Error(`Action is not supported`);
   }
 };
 

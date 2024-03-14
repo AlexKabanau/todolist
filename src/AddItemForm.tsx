@@ -1,5 +1,5 @@
 import { ControlPoint } from '@mui/icons-material';
-import { Button, IconButton, TextField } from '@mui/material';
+import { Button, Grid, IconButton, TextField } from '@mui/material';
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 
@@ -34,9 +34,10 @@ export function AddItemForm(props: AddItemFormPropsType) {
   };
 
   return (
-    <div>
+    <Grid display="flex" alignItems="center">
       <TextField
-        variant={'outlined'}
+        variant={'filled'}
+        color={'success'}
         label={'Type value'}
         value={newTaskTitle}
         onChange={onChangeHandler}
@@ -44,9 +45,9 @@ export function AddItemForm(props: AddItemFormPropsType) {
         error={!!error}
         helperText={error}
       />
-      <IconButton onClick={addTask} color={'secondary'}>
+      <IconButton onClick={addTask} color={'success'}>
         <AddTaskIcon />
       </IconButton>
-    </div>
+    </Grid>
   );
 }

@@ -14,6 +14,7 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
+// import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import { Menu } from '@mui/icons-material';
 
 export type FilterValuesType = 'all' | 'complited' | 'active';
@@ -125,24 +126,33 @@ function App() {
 
   return (
     <div className="App">
-      <AppBar position={'static'}>
+      <AppBar position={'static'} color={'success'}>
         <Toolbar>
-          <IconButton color={'inherit'} aria-label={'menu'} edge={'start'}>
+          <IconButton
+            size={'large'}
+            edge={'start'}
+            color={'inherit'}
+            aria-label={'menu'}
+            sx={{ mr: 2 }}>
             <Menu />
           </IconButton>
-          <Typography variant={'h6'}>News</Typography>
+          <Typography variant={'h6'} component={'div'} sx={{ flexGrow: 1 }}>
+            News
+          </Typography>
           <Button color={'inherit'}>Login</Button>
         </Toolbar>
       </AppBar>
       <Container fixed>
-        <Grid container style={{ padding: '10px' }}>
+        <Grid container style={{ paddingBottom: '10px' }}>
           <div>
-            <h1>TodoList</h1>
+            <Typography variant={'h3'} component={'h1'}>
+              TodoList
+            </Typography>
             <AddItemForm addItem={addTodoList} />
           </div>
         </Grid>
 
-        <Grid container spacing={'10'}>
+        <Grid container spacing={2}>
           {todoLists.map((todoList) => {
             let tasksForTodoList = tasksObj[todoList.id];
             if (todoList.filter === 'complited') {
@@ -153,7 +163,7 @@ function App() {
             }
 
             return (
-              <Grid item>
+              <Grid item spacing={2}>
                 <Paper style={{ padding: '10px' }}>
                   <TodoList
                     key={todoList.id}

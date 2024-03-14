@@ -2,9 +2,8 @@ import React, { ChangeEvent } from 'react';
 import { FilterValuesType } from './App';
 import { AddItemForm } from './AddItemForm';
 import { EditableSpan } from './EditableSpan';
-import { Button, Checkbox, IconButton } from '@mui/material';
-import { Delete } from '@mui/icons-material';
-
+import { Button, Checkbox, Grid, IconButton, Typography } from '@mui/material';
+import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 export type TaskType = {
   id: string;
   title: string;
@@ -48,12 +47,17 @@ export const TodoList = (props: PropsType) => {
 
   return (
     <div>
-      <h3>
+      <Typography
+        variant={'h5'}
+        component={'div'}
+        sx={{ flexGrow: 1 }}
+        display="flex"
+        alignItems="center">
         <EditableSpan title={props.title} onChange={changeTodoListTitle} />{' '}
         <IconButton aria-label="delete" onClick={removeTodoList}>
-          <Delete />
+          <DeleteTwoToneIcon />
         </IconButton>
-      </h3>
+      </Typography>
       <AddItemForm addItem={addTask} />
 
       <div>
@@ -69,11 +73,17 @@ export const TodoList = (props: PropsType) => {
           };
 
           return (
-            <div key={t.id} className={t.isDone ? 'is-done' : ''}>
-              <Checkbox color={'secondary'} checked={t.isDone} onChange={onChangeStatusHandler} />
+            <div
+              key={t.id}
+              className={t.isDone ? 'is-done' : ''}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}>
+              <Checkbox color={'success'} checked={t.isDone} onChange={onChangeStatusHandler} />
               <EditableSpan title={t.title} onChange={onChangeTitleHandler} />
               <IconButton aria-label="delete" onClick={onRemoveHandler}>
-                <Delete />
+                <DeleteTwoToneIcon />
               </IconButton>
             </div>
           );
@@ -93,7 +103,7 @@ export const TodoList = (props: PropsType) => {
           Active
         </Button>
         <Button
-          color={'secondary'}
+          color={'success'}
           variant={props.filter === 'complited' ? 'contained' : 'text'}
           onClick={onComplitedClickHandler}>
           Complited
