@@ -63,26 +63,26 @@ export const todolistReducer = (
   }
 };
 
-export const RemoveTodoListAC = (todolistId: string): RemoveTodoListActionType => {
+export const removeTodoListAC = (todolistId: string): RemoveTodoListActionType => {
   return {
     type: 'REMOVE_TODOLIST',
     id: todolistId,
   };
 };
-export const AddTodoListAC = (title: string): AddTodoListActionType => {
+export const addTodoListAC = (title: string): AddTodoListActionType => {
   return {
     type: 'ADD_TODOLIST',
     title: title,
   };
 };
-export const ChangeTodoListTitleAC = (id: string, title: string): ChangeTodoListTitleActionType => {
+export const changeTodoListTitleAC = (id: string, title: string): ChangeTodoListTitleActionType => {
   return {
     type: 'CHANGE_TODOLIST_TITLE',
     id: id,
     title: title,
   };
 };
-export const ChangeTodoListFilterAC = (
+export const changeTodoListFilterAC = (
   id: string,
   filter: FilterValuesType,
 ): ChangeTodoListFilterActionType => {

@@ -1,8 +1,8 @@
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import { FilterValuesType } from './App';
 import { AddItemForm } from './AddItemForm';
 import { EditableSpan } from './EditableSpan';
-import { Button, Checkbox, Grid, IconButton, Typography } from '@mui/material';
+import { Button, Checkbox, IconButton, Typography } from '@mui/material';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 export type TaskType = {
   id: string;
