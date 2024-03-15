@@ -1,5 +1,5 @@
 import { v1 } from 'uuid';
-import { FilterValuesType, TodoListType } from '../App';
+import { FilterValuesType, TodoListType } from '../AppWithRedux';
 
 export type RemoveTodoListActionType = {
   type: 'REMOVE_TODOLIST';
@@ -27,8 +27,16 @@ export type ActionsTypes =
   | ChangeTodoListTitleActionType
   | ChangeTodoListFilterActionType;
 
+export let todoListId1 = v1();
+export let todoListId2 = v1();
+
+const initialState: Array<TodoListType> = [
+  { id: todoListId1, title: 'What to learn', filter: 'all' },
+  { id: todoListId2, title: 'What to buy', filter: 'all' },
+];
+
 export const todolistReducer = (
-  state: Array<TodoListType>,
+  state: Array<TodoListType> = initialState,
   action: ActionsTypes,
 ): Array<TodoListType> => {
   switch (action.type) {
@@ -37,12 +45,12 @@ export const todolistReducer = (
     }
     case 'ADD_TODOLIST': {
       return [
-        ...state,
         {
           id: action.todolistId,
           title: action.title,
           filter: 'all',
         },
+        ...state,
       ];
     }
     case 'CHANGE_TODOLIST_TITLE': {
@@ -60,7 +68,7 @@ export const todolistReducer = (
       return [...state];
     }
     default:
-      throw new Error(`Action is not supported`);
+      return state;
   }
 };
 

@@ -1,6 +1,11 @@
 import { v1 } from 'uuid';
-import { FilterValuesType, TasksStateType, TodoListType } from '../App';
-import { AddTodoListActionType, RemoveTodoListActionType } from './todolist-reducer';
+import { FilterValuesType, TasksStateType, TodoListType } from '../AppWithRedux';
+import {
+  AddTodoListActionType,
+  RemoveTodoListActionType,
+  todoListId1,
+  todoListId2,
+} from './todolist-reducer';
 
 export type RemoveTaskActionType = {
   type: 'REMOVE_TASK';
@@ -33,7 +38,25 @@ export type ActionsTypes =
   | AddTodoListActionType
   | RemoveTodoListActionType;
 
-export const tasksReducer = (state: TasksStateType, action: ActionsTypes): TasksStateType => {
+const initialState: TasksStateType = {
+  [todoListId1]: [
+    { id: v1(), title: 'CSS+HTML', isDone: true },
+    { id: v1(), title: 'JS', isDone: true },
+    { id: v1(), title: 'ReactJS', isDone: false },
+    { id: v1(), title: 'Rest API', isDone: false },
+    { id: v1(), title: 'GraphQL', isDone: false },
+  ],
+  [todoListId2]: [
+    { id: v1(), title: 'Books', isDone: true },
+    { id: v1(), title: 'Milk', isDone: true },
+    { id: v1(), title: 'Cucumber', isDone: false },
+  ],
+};
+
+export const tasksReducer = (
+  state: TasksStateType = initialState,
+  action: ActionsTypes,
+): TasksStateType => {
   switch (action.type) {
     case 'REMOVE_TASK': {
       const stateCopy = { ...state };
@@ -91,7 +114,7 @@ export const tasksReducer = (state: TasksStateType, action: ActionsTypes): Tasks
       return { ...stateCopy };
     }
     default:
-      throw new Error(`Action is not supported`);
+      return state;
   }
 };
 
