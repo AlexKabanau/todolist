@@ -1,8 +1,8 @@
-import React, { useReducer } from 'react';
+// import React, { useReducer } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import { TaskType, TodoList } from './TodoList';
-import { v1 } from 'uuid';
+// import { v1 } from 'uuid';
 import { AddItemForm } from './AddItemForm';
 import {
   AppBar,
@@ -21,15 +21,15 @@ import {
   changeTodoListFilterAC,
   changeTodoListTitleAC,
   removeTodoListAC,
-  todolistReducer,
+  // todolistReducer,
 } from './state/todolist-reducer';
-import {
-  addTaskAC,
-  changeTaskStatusAC,
-  changeTaskTitleAC,
-  removeTaskAC,
-  tasksReducer,
-} from './state/tasks-reducer';
+// import {
+//   addTaskAC,
+//   changeTaskStatusAC,
+//   changeTaskTitleAC,
+//   removeTaskAC,
+//   tasksReducer,
+// } from './state/tasks-reducer';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { AppRootStateType } from './state/store';
@@ -49,7 +49,7 @@ function AppWithRedux() {
   const dispatch = useDispatch();
 
   const todoLists = useSelector<AppRootStateType, Array<TodoListType>>((state) => state.todolists);
-  const tasksObj = useSelector<AppRootStateType, TasksStateType>((state) => state.tasks);
+  // const tasksObj = useSelector<AppRootStateType, TasksStateType>((state) => state.tasks);
 
   function changeFilter(value: FilterValuesType, todoListId: string) {
     const action = changeTodoListFilterAC(todoListId, value);
@@ -70,6 +70,7 @@ function AppWithRedux() {
     const action = addTodoListAC(title);
     dispatch(action);
   }
+  console.log('App is called');
 
   return (
     <div className="App">

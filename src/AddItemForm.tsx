@@ -1,12 +1,13 @@
 import { Grid, IconButton, TextField } from '@mui/material';
-import { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, memo, useState } from 'react';
 import AddTaskIcon from '@mui/icons-material/AddTask';
+import React from 'react';
 
 export type AddItemFormPropsType = {
   addItem: (title: string) => void;
 };
 
-export function AddItemForm(props: AddItemFormPropsType) {
+export const AddItemForm = memo(function AddItemForm(props: AddItemFormPropsType) {
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [error, setError] = useState<string | null>(null);
 
@@ -15,7 +16,9 @@ export function AddItemForm(props: AddItemFormPropsType) {
   };
 
   const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    setError(null);
+    if (error !== null) {
+      setError(null);
+    }
     if (e.key === 'Enter') {
       addTask();
       // props.addTask(newTaskTitle, props.id);
@@ -31,6 +34,7 @@ export function AddItemForm(props: AddItemFormPropsType) {
       setError('Title is required');
     }
   };
+  console.log('Form is called');
 
   return (
     <Grid display="flex" alignItems="center">
@@ -49,4 +53,4 @@ export function AddItemForm(props: AddItemFormPropsType) {
       </IconButton>
     </Grid>
   );
-}
+});
