@@ -1,6 +1,8 @@
 import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { Task } from './Task';
+import { Task, TaskPropsType } from './Task';
+import { Provider } from 'react-redux';
+import { store } from './state/store';
 
 const meta = {
   title: 'Task Component',
@@ -11,9 +13,9 @@ export default meta;
 
 const callback = action('Button add was pressed inside the form');
 
-export const TaskBaseExample = (props: any) => {
+export const TaskBaseExample = (props: TaskPropsType) => {
   return (
-    <>
+    <Provider store={store}>
       <Task
         task={{
           id: '1',
@@ -30,7 +32,6 @@ export const TaskBaseExample = (props: any) => {
         }}
         todolistId={'todolistId2'}
       />
-      ;
-    </>
+    </Provider>
   );
 };
