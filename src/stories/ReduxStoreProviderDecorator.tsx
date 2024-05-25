@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { AppRootStateType, store } from '../state/store';
+import { AppRootStateType } from '../state/store';
 import { combineReducers, createStore } from 'redux';
 import { todolistReducer } from '../state/todolist-reducer';
 import { tasksReducer } from '../state/tasks-reducer';
@@ -33,15 +33,18 @@ const preloadedState = {
   },
 };
 
-export const stotyBookState = createStore(reducer, preloadedState as AppRootStateType);
+export const store = createStore(combineReducers);
 
+// export const stotyBookState = createStore(reducer, preloadedState as AppRootStateType);
+
+//
 // export const stotyBookState = configureStore({
 //   reducer,
-//   preloadedState
+//   preloadedState,
 // });
 
 // type AppRootStateType = ReturnType<typeof stotyBookState.getState()>
 
 export const ReduxStoreProviderDecorator = (storyFn: any) => {
-  return <Provider store={stotyBookState}>{storyFn()}</Provider>;
+  return <Provider store={store}>{storyFn()}</Provider>;
 };
