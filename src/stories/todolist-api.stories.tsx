@@ -64,3 +64,20 @@ export const UpdateTodoList = () => {
 
   return <div>SET newTitle, {JSON.stringify(state)}</div>;
 };
+
+export const GetTasks = () => {
+  const [state, setState] = useState<any>([]);
+  debugger;
+
+  useEffect(() => {
+    const todolistId = '0c46879c-7ac5-461c-acd5-8bf78208e118';
+    todolistsApi.getTasks(todolistId).then((res) => {
+      debugger;
+      console.log('GET tasks', res.data);
+
+      setState(res.data);
+    });
+  }, []);
+
+  return <div>GET tasks, {JSON.stringify(state)}</div>;
+};

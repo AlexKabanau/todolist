@@ -7,32 +7,70 @@ const settings = {
   },
 };
 
+export type TodolistType = {
+  id: string;
+  title: string;
+  addDate: string;
+  order: number;
+};
+
+type ResponseType<D> = {
+  resultCode: number;
+  messages: Array<string>;
+  data: D;
+};
+
+export type TaskType = {
+  description: string;
+  title: string;
+  completed: boolean;
+  status: number;
+  priority: number;
+  startDate: string;
+  deadline: string;
+  id: string;
+  todoListId: string;
+  order: number;
+  addedDate: string;
+};
+
+type GetTasksTypeResponse = {
+  error: string | null;
+  totalCount: number;
+  items: Array<TaskType>;
+};
+
 export const todolistsApi = {
   getTodolists() {
-    return axios.get(`https://social-network.samuraijs.com/api/1.1/todo-lists`, settings);
+    return axios.get<Array<TodolistType>>(
+      `https://social-network.samuraijs.com/api/1.1/todo-lists`,
+      settings,
+    );
   },
   createTodolist(title: string) {
-    return axios.post(
-      `https://social-network.samuraijs.com/api/1.1/todo-lists`,
-      { title: title },
-      settings,
-    );
+    return axios.post<
+      ResponseType<{
+        item: TodolistType;
+      }>
+    >(`https://social-network.samuraijs.com/api/1.1/todo-lists`, { title: title }, settings);
   },
-  deleteTodolist() {
-    const todolistId = `a0859e3c-4e54-4c0d-8ecf-833444eb196f`;
-
-    return axios.delete(
+  deleteTodolist(todolistId: string) {
+    return axios.delete<ResponseType<{}>>(
       `https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`,
 
       settings,
     );
   },
-  updateTodolist(title: string) {
-    const todolistId = `2ba92eaa-543b-4f8a-adca-a77a015d3d86`;
-
-    return axios.put(
+  updateTodolist(todolistId: string, title: string) {
+    return axios.put<ResponseType<{}>>(
       `https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`,
       { title: title },
+      settings,
+    );
+  },
+  getTasks(todolistId: string) {
+    return axios.get<GetTasksTypeResponse>(
+      `https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}/tasks`,
       settings,
     );
   },
