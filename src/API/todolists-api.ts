@@ -75,12 +75,12 @@ export const todolistsApi = {
     return instance.get<GetTasksTypeResponse>(`todo-lists/${todolistId}/tasks`);
   },
   deleteTask(todolistId: string, taskId: string) {
+    return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`);
+  },
+  createTask(todolistId: string, taskTitle: string) {
+    return instance.post<ResponseType>(`todo-lists/${todolistId}/tasks`, { title: taskTitle });
+  },
+  updateTask(todolistId: string, taskId: string, taskTitle: string) {
     return instance.delete<ResponseType>(`todo-lists/${todolistId}/${taskId}`);
   },
-  // createTask(todolistId: string, taskId: string) {
-  //   return instance.delete<ResponseType>(`todo-lists/${todolistId}/${taskId}`);
-  // },
-  // updateTask(todolistId: string, taskId: string) {
-  //   return instance.delete<ResponseType>(`todo-lists/${todolistId}/${taskId}`);
-  // },
 };
